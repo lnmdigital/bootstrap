@@ -1,0 +1,5 @@
+{
+  "name": "angular-bootstrap",
+  "homepage": "https://github.com/lnmdigital/bootstrap",
+  "main": "./dist/ui-bootstrap-tpls-0.12.0-SNAPSHOT.min.js"
+}
