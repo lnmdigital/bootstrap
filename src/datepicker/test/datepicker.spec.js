@@ -693,7 +693,40 @@ describe('datepicker directive', function () {
     });
 
   });
+  
+  describe('attribute `ng-model`', function() {
+    var dateFilter, today;
+    beforeEach(inject(function(_dateFilter_) {
+      dateFilter = _dateFilter_;
+      today = new Date();
+      element = $compile('<datepicker></datepicker>')($rootScope);
+      $rootScope.$digest();
+    }));
 
+    it('should work without model on day-mode', function() {
+      var title = dateFilter(today, 'MMMM yyyy');
+      expect(getTitle()).toBe(title);
+    });
+
+    it('should work without model on month-mode', function() {
+      clickTitleButton();
+      var title = dateFilter(today, 'yyyy');
+      expect(getTitle()).toBe(title);
+    });
+
+    it('should work without model on year-mode', function() {
+      clickTitleButton();
+      clickTitleButton();
+
+      // Simulate datepicker's algorithm for year ranges
+      var start = parseInt((today.getFullYear() - 1) / 20, 10) * 20 + 1;
+      var end = start + 19; // The default range is 20;
+      var title = start + ' - ' + end;
+
+      expect(getTitle()).toBe(title);
+    });
+  });
+  
   describe('attribute `starting-day`', function () {
     beforeEach(function() {
       $rootScope.startingDay = 1;

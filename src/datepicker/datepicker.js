@@ -81,8 +81,10 @@ angular.module('ui.bootstrap.datepicker', ['ui.bootstrap.dateparser', 'ui.bootst
     if ( this.element ) {
       this._refreshView();
 
-      var date = ngModelCtrl.$modelValue ? new Date(ngModelCtrl.$modelValue) : null;
-      ngModelCtrl.$setValidity('date-disabled', !date || (this.element && !this.isDisabled(date)));
+      if (ngModelCtrl.$modelValue) {
+        var date = ngModelCtrl.$modelValue ? new Date(ngModelCtrl.$modelValue) : null;
+        ngModelCtrl.$setValidity('date-disabled', !date || (this.element && !this.isDisabled(date)));
+      }
     }
   };
 
